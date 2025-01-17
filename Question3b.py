@@ -1,5 +1,6 @@
+# -----------------------------------------------------------------------------
 # Stable Sorting Algorithm - Merge Sort
-
+# -----------------------------------------------------------------------------
 
 
 
@@ -35,3 +36,24 @@ def QuickSort(inputArr) :
 
 print(QuickSort(Arr))
 
+
+
+# -----------------------------------------------------------------------------
+# Extra Stable Sorting Algorithm - Insertion Sort
+# -----------------------------------------------------------------------------
+s = [1,8,2,3,4,5,6,10,7,14]
+
+for ptr in range(1,len(s)):
+    ptrvalue = s[ptr]
+    ptrminusone = ptr - 1
+
+    while ptrminusone >= 0:
+        if ptrvalue < s[ptrminusone]:
+            s[ptrminusone+1] = s[ptrminusone]   # Shift number in ptr-1 to ptr
+            s[ptrminusone] = ptrvalue           # Shift number in ptr to ptr-1
+            ptrminusone = ptrminusone - 1
+
+        else:
+            break
+
+print(s)
