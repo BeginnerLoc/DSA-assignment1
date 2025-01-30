@@ -21,32 +21,40 @@ print(array)
 
 
 # -----------------------------------------------------------------------------
-# Unstable Sorting Algorithm - Quick Sort
+# Unstable Sorting Algorithm - Heap Sort
 # -----------------------------------------------------------------------------
+def heapify(arr, n, i): 
 
-Arr = [8,2,4,6,7,8,5]
+    largest = i  # Assume root (largest) as the largest element 
+    left = 2 * i + 1  # Left child index 
+    right = 2 * i + 2  # Right child index 
 
-def QuickSort(inputArr) :
+    # Check if left child exists and is greater than root 
+    if left < n and arr[left] > arr[largest]: 
+        largest = left
 
-    # Array <= 1 element means already sorted
-    if len(inputArr) <= 1: 
-        return inputArr
+    # Check if right child exists and is greater than root 
+    if right < n and arr[right] > arr[largest]: 
+        largest = right 
 
-    # Choose a pivot, in this case, we use the last value in the array
-    pivot = inputArr[-1]
-    less_than_pivot, equal_to_pivot, greater_than_pivot = [], [], []
-    
-    # Iterate through all the elements in the array
-    for x in inputArr:
-        # Values less than pivot in one array. Values more than pivot in another array
-        if x < pivot:
-            less_than_pivot.append(x)
-        elif x > pivot:
-            greater_than_pivot.append(x)
-        else:
-            equal_to_pivot.append(x)
+    # If largest is not root, swap and continue heapifying 
+    if largest != i: 
+        arr[i], arr[largest] = arr[largest], arr[i] 
+        heapify(arr, n, largest)  # Recursively heapify the affected subtree 
 
-    #  Recursively sort the sub arrays and combine the results
-    return QuickSort(less_than_pivot) + equal_to_pivot + QuickSort(greater_than_pivot)
+  
 
-print(QuickSort(Arr))
+def heap_sort(arr): 
+    n = len(arr) 
+    # Step 1: Build a max heap 
+    for i in range(n // 2 - 1, -1, -1): 
+        heapify(arr, n, i) 
+
+
+    # Step 2: Extract elements one by one from the heap 
+    for i in range(n - 1, 0, -1): 
+
+        arr[i], arr[0] = arr[0], arr[i]  # Swap the root (max) with the last element 
+
+        heapify(arr, i, 0)  # Heapify the reduced heap 
+
