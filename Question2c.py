@@ -1,5 +1,3 @@
-# Natalie
-#Recursive three-way merge sort algorithm
 def three_way_split(arr,l,r):
     
     if l>=r:
@@ -7,13 +5,14 @@ def three_way_split(arr,l,r):
         return [arr[l]] if l == r else []
 
     # Split the array into three sub arrays with approximately size n/2
-    mid1 = l + (r - l) // 2
-    mid2 = mid1 + (r - mid1) // 2
+    n = r - l + 1
+    mid1 = l + n // 4  
+    mid2 = l + n // 2
 
     # Recursive sorting
-    left_subarr = three_way_split(arr, l, mid1)
-    middle_subarr = three_way_split(arr, mid1 + 1, mid2)
-    right_subarr = three_way_split(arr, mid2 + 1, r)
+    left_subarr = three_way_split(arr, l, mid2 - 1)
+    middle_subarr = three_way_split(arr, mid1, mid1 + n//2 - 1)
+    right_subarr = three_way_split(arr, mid2, r)
 
     # Merge the sorted arrays
     return merge_sort(left_subarr, middle_subarr, right_subarr)
@@ -33,21 +32,26 @@ def merge_sort(left_subarr, middle_subarr, right_subarr):  # Merge three sorted 
         # Check if the element in the left array is the smallest
         if current_left is not None and (current_middle is None or current_left <= current_middle
             ) and (current_right is None or current_left <= current_right):
-            merged.append(current_left)
+            if not merged or current_left != merged[-1]:
+                merged.append(current_left)
             i += 1
         # Check if the element in the middle array is the smallest
         elif current_middle is not None and (current_right is None or current_middle <= current_right):
-            merged.append(current_middle)
+            if not merged or current_middle != merged[-1]:
+                merged.append(current_middle)
             j += 1
         else: # The element in the right array is the smallest
-            merged.append(current_right)
+            if not merged or current_right != merged[-1]:
+                merged.append(current_right)
             k += 1
 
     return merged
 
+
+
+
 # Usage
-array = [10,3,15,7,8,23,4,1,19,5,6,18,20,17,14,9,11,2,22,13] 
+input_string = input("Enter the numbers you would like to sort (separated by a comma): ")
+array = list(map(int, input_string.split(',')))
 sorted_array = three_way_split(array,0,len(array)-1)
 print("Final Sorted Array:", sorted_array)
-
-#Code to demonstrate complexity of algorithm with test data
