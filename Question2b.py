@@ -116,10 +116,14 @@ Returns a sorted version of the list.
 quadratic_array = [1,2,3,4,5]
 
 def quadratic_comparison(array, target_num):
+    comparisons = 0  
     for i in range(len(array)):
         for j in range(len(array)):
+            comparisons += 1  
             if array[i] + array[j] == target_num:
+                print(f"Total comparisons made: {comparisons}")
                 return True
+    print(f"Total comparisons made: {comparisons}")
     return False
 
 print(f"The outcome of the quadratic algorithm is {quadratic_comparison(quadratic_array, 10)}")
