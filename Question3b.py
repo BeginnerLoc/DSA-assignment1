@@ -16,8 +16,7 @@ for ptr in range(1, len(array)):
         else:
             break
 
-print("hello")
-print(array)
+print("Sorted Array:", array)
 
 
 # -----------------------------------------------------------------------------
@@ -57,4 +56,11 @@ def heap_sort(arr):
         arr[i], arr[0] = arr[0], arr[i]  # Swap the root (max) with the last element 
 
         heapify(arr, i, 0)  # Heapify the reduced heap 
+
+    return arr
+
+arr = [5,6,7,4,3,1,2]
+print("Sorted Array:", heap_sort(arr))
+
+
 

@@ -54,4 +54,4 @@ def merge_sort(left_subarr, middle_subarr, right_subarr):  # Merge three sorted 
 input_string = input("Enter the numbers you would like to sort (separated by a comma): ")
 array = list(map(int, input_string.split(',')))
 sorted_array = three_way_split(array,0,len(array)-1)
-print("Final Sorted Array:", sorted_array)
+print("Sorted Array:", sorted_array)
